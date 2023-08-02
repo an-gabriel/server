@@ -25,9 +25,9 @@ export class BaseController {
   public async createBase(req: Request, res: Response) {
     try {
       const base = new Base(req.body);
-      await Base.save();
+      await base.save();
 
-      res.status(200).json(Base.toJSON());
+      res.status(200).json(base.toJSON());
     } catch (error) {
       res.status(500).send({ messagem: (error as Error).message });
     }
@@ -43,29 +43,6 @@ export class BaseController {
       });
 
       res.status(200).json({ message: 'Information has been changed' });
-    } catch (error) {
-      res.status(500).send({ messagem: (error as Error).message });
-    }
-  }
-
-  @httpDelete(`${PathRoutes.DELETE}/:id`)
-  public async deleteBase(req: Request, res: Response) {
-    console.log('oi');
-    try {
-      const { id } = req.params;
-
-      const base = await Base.findById(id);
-      const IsExistsBase = !Base;
-
-      if (IsExistsBase) {
-        return res
-          .status(404)
-          .json({ message: `the requested record does not exist` });
-      }
-
-      await Base.findByIdAndDelete(id);
-
-      res.status(200).json({ message: `record ${id} deleted` });
     } catch (error) {
       res.status(500).send({ messagem: (error as Error).message });
     }

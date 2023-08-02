@@ -1,6 +1,7 @@
 import { Container } from 'inversify';
-import { HelloController } from './modules/base/controller/hello.controller';
 import { HealthCheckController } from './modules/health-check/controller/health-check.controller';
+import { KnightController } from './modules/knight/controller/knight.controller';
+import { KnightService } from './modules/knight/service/knight.service';
 
 export class DiContainer {
   private static container: Container;
@@ -14,7 +15,8 @@ export class DiContainer {
   }
 
   private static registerControllers(): void {
-    this.container.bind<HelloController>(HelloController).toSelf();
     this.container.bind<HealthCheckController>(HealthCheckController).toSelf();
+    this.container.bind<KnightController>(KnightController).toSelf();
+    this.container.bind<KnightService>(KnightService).toSelf();
   }
 }

@@ -1,6 +1,7 @@
 export enum PathRoutes {
   DEFAULT = '/',
-  BASE_PATH = '/api/v1',
+  LIST = '/list',
+  BASE_PATH = '/api/v1/knights',
   HEALTH_CHECK = '/health-check',
   HELLO_WORLD = '/hello-world',
   CREATE = '/create',
