@@ -13,7 +13,7 @@ export interface FinallyOperation {
 @injectable()
 export class KnightService {
   public async list(): Promise<KnightDocument[]> {
-    const knight = await Knights.find();
+    const knight = await Knights.find({ deleted: false });
 
     return knight;
   }

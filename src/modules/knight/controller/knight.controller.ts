@@ -20,7 +20,6 @@ export class KnightController {
   @httpGet(`${PathRoutes.DEFAULT}`)
   public async listBase(req: Request, res: Response) {
     try {
-      console.log('oi');
       const { filter } = req.query;
 
       let knight;
@@ -79,7 +78,15 @@ export class KnightController {
 
       const keyAttributeModifier = this.modTable(keyAttributeValue);
 
-      const attack = 10 + keyAttributeModifier + equippedWeaponModifier;
+      const attack =
+        10 + Math.abs(keyAttributeModifier) + equippedWeaponModifier;
+
+      console.log(
+        attack,
+        keyAttributeModifier,
+        equippedWeaponModifier,
+        equippedWeapon,
+      );
 
       if (!bodyKnight.attributes) {
         bodyKnight.attributes = {} as AttributesKnight;
@@ -120,7 +127,17 @@ export class KnightController {
       [20, 3],
     ]);
 
-    return mappedMod.get(value);
+    const modRetuned = mappedMod.get(value);
+
+    if (modRetuned) {
+      return modRetuned!;
+    }
+
+    if (value > 20) {
+      return 3;
+    }
+
+    return -2;
   }
 
   @httpPut(`${PathRoutes.UPDATE}/:id`)
@@ -139,6 +156,7 @@ export class KnightController {
   @httpDelete(`${PathRoutes.DELETE}/:id`)
   public async delete(req: Request, res: Response) {
     try {
+      console.log('oi');
       const { id } = req.params;
 
       await this.knightService.delete({ _id: id });
