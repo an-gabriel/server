@@ -81,13 +81,6 @@ export class KnightController {
       const attack =
         10 + Math.abs(keyAttributeModifier) + equippedWeaponModifier;
 
-      console.log(
-        attack,
-        keyAttributeModifier,
-        equippedWeaponModifier,
-        equippedWeapon,
-      );
-
       if (!bodyKnight.attributes) {
         bodyKnight.attributes = {} as AttributesKnight;
       }
